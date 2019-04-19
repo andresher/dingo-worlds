@@ -11,7 +11,13 @@ int flipperInput = 0;
 
 void flipperFSM(){
 	int flipHeight = 20;
-	int flipLow = lift.getPosition() > 300 ? 95 : 120;
+	int flipLow = 120;
+
+	if (lift.getPosition() > 650) {
+		flipLow = 100;
+	} else if (lift.getPosition() > 300) {
+		flipLow = 110;
+	}
 
 	if (flipperState == 0) {
 		flipperController.setTarget(0);
