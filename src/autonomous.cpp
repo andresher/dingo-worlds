@@ -25,7 +25,7 @@ void moveDistance(QLength len) {
 }
 
 void autoBlueBack() {
-  catapult.set_value(0);
+  catapult.set_value(1);
   removeSlack();
   pros::delay(100);
   // Get first cap
@@ -101,13 +101,23 @@ void autoBlueBack() {
   driveController.turnAngle(100_deg);
   // Place 3rd
   liftController.setMaxVelocity(200);
-  liftController.setTarget(720);
+  liftController.setTarget(HIGH_GOAL_HEIGHT);
   liftController.waitUntilSettled();
   driveController.setMaxVelocity(60);
   driveController.moveDistance(7_in);
   flipperController.setTarget(95);
   flipperController.waitUntilSettled();
   pros::delay(700);
+  // shaky shaky
+  liftController.flipDisable();
+  for (int i=0; i<4; i++){
+    lift.moveVoltage(5000);
+    pros::delay(120);
+    lift.moveVoltage(-5000);
+    pros::delay(100);
+  }
+  liftController.flipDisable();
+  // end shaky shaky
   liftController.setMaxVelocity(150);
   liftController.setTarget(150);
   liftController.waitUntilSettled();
@@ -130,7 +140,7 @@ void autoBlueBack() {
 }
 
 void autoRedBack() {
-  catapult.set_value(0);
+  catapult.set_value(1);
   removeSlack();
   pros::delay(100);
   // Get first cap
@@ -235,7 +245,7 @@ void autoRedBack() {
 }
 
 void autoRedFront() {
-  catapult.set_value(0);
+  catapult.set_value(1);
   removeSlack();
   pros::delay(100);
   liftController.setTarget(280);
@@ -327,5 +337,5 @@ void autoRedFront() {
 }
 
 void autonomous() {
-  autoRedBack();
+  autoBlueBack();
 }
