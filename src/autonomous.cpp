@@ -340,10 +340,12 @@ void autoBlueFront() {
   catapult.set_value(1);
   removeSlack();
   pros::delay(100);
+  driveController.turnAngle(15_deg);
+  pros::delay(400);
   liftController.setTarget(280);
   flipperController.setTarget(120);
   driveController.setMaxVelocity(80);
-  driveController.moveDistance(38_in);
+  driveController.moveDistance(33_in);
   driveController.moveDistance(-9_in);
   pros::delay(200);
   flipperController.setTarget(0);
@@ -352,7 +354,7 @@ void autoBlueFront() {
   liftController.waitUntilSettled();
   driveController.setMaxVelocity(70);
   driveController.turnAngle(-90_deg);
-  driveController.moveDistance(-7_in);
+  driveController.moveDistance(-10_in);
   flipperController.setTarget(120);
   flipperController.waitUntilSettled();
   driveController.moveDistance(23_in);
@@ -364,8 +366,8 @@ void autoBlueFront() {
   driveController.setMaxVelocity(70);
   flipperController.setTarget(0);
   flipperController.waitUntilSettled();
-  driveController.moveDistance(36_in);
-  driveController.turnAngle(-90_deg);
+  driveController.moveDistance(33_in);
+  driveController.turnAngle(-92_deg);
   flipperController.setTarget(98);
   flipperController.waitUntilSettled();
   liftController.setMaxVelocity(200);
@@ -392,7 +394,7 @@ void autoBlueFront() {
   liftController.waitUntilSettled();
   // End place first cap
   driveController.setMaxVelocity(70);
-  driveController.turnAngle(-90_deg);
+  driveController.turnAngle(-94_deg);
   driveController.moveDistance(10_in);
   driveController.turnAngle(-90_deg);
   driveController.forward(-0.7);
@@ -429,5 +431,5 @@ void autoBlueFront() {
 }
 
 void autonomous() {
-  autoBlueFront();
+  autoRedFront();
 }
