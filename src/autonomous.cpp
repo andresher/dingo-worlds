@@ -24,8 +24,7 @@ void moveDistance(QLength len) {
   profileController.waitUntilSettled();
 }
 
-void autoBlue1() {
-  transmission.set_value(1);
+void autoBlueBack() {
   catapult.set_value(0);
   removeSlack();
   pros::delay(100);
@@ -130,8 +129,7 @@ void autoBlue1() {
   driveController.stop();
 }
 
-void autoRed1() {
-  transmission.set_value(1);
+void autoRedBack() {
   catapult.set_value(0);
   removeSlack();
   pros::delay(100);
@@ -236,49 +234,54 @@ void autoRed1() {
   driveController.stop();
 }
 
-void autoRed2() {
+void autoRedFront() {
   catapult.set_value(0);
   removeSlack();
   pros::delay(100);
   liftController.setTarget(280);
   flipperController.setTarget(120);
-  driveController.setMaxVelocity(100);
-  driveController.moveDistance(32_in);
+  driveController.setMaxVelocity(80);
+  driveController.moveDistance(38_in);
+  driveController.moveDistance(-9_in);
+  pros::delay(200);
   flipperController.setTarget(0);
   liftController.setTarget(-20);
   flipperController.waitUntilSettled();
   liftController.waitUntilSettled();
-  driveController.setMaxVelocity(80);
+  driveController.setMaxVelocity(70);
   driveController.turnAngle(90_deg);
   driveController.moveDistance(-7_in);
   flipperController.setTarget(120);
   flipperController.waitUntilSettled();
-  driveController.moveDistance(17_in);
+  driveController.moveDistance(23_in);
   liftController.setTarget(100);
   liftController.waitUntilSettled();
+  driveController.moveDistance(-6_in);
   driveController.setMaxVelocity(40);
-  driveController.turnAngle(91_deg);
-  driveController.setMaxVelocity(80);
+  driveController.turnAngle(92_deg);
+  driveController.setMaxVelocity(70);
   flipperController.setTarget(0);
   flipperController.waitUntilSettled();
-  driveController.moveDistance(36.5_in);
+  driveController.moveDistance(36_in);
   driveController.turnAngle(90_deg);
+  flipperController.setTarget(98);
+  flipperController.waitUntilSettled();
   liftController.setMaxVelocity(200);
   liftController.setTarget(HIGH_GOAL_HEIGHT);
   liftController.waitUntilSettled();
   driveController.setMaxVelocity(20);
-  driveController.moveDistance(8_in);
-  driveController.forward(0.3);
-  pros::delay(200);
-  driveController.stop();
-  flipperController.setTarget(103);
-  flipperController.waitUntilSettled();
+  driveController.moveDistance(10_in);
   pros::delay(700);
+  // shaky shaky
   liftController.flipDisable();
-  lift.moveVoltage(-3000);
-  pros::delay(500);
-  lift.moveVoltage(0);
+  for (int i=0; i<4; i++){
+    lift.moveVoltage(5000);
+    pros::delay(120);
+    lift.moveVoltage(-5000);
+    pros::delay(100);
+  }
   liftController.flipDisable();
+  // end shaky shaky
   liftController.setMaxVelocity(80);
   liftController.setTarget(150);
   liftController.waitUntilSettled();
@@ -286,15 +289,15 @@ void autoRed2() {
   liftController.setTarget(-20);
   liftController.waitUntilSettled();
   // End place first cap
-  driveController.setMaxVelocity(80);
+  driveController.setMaxVelocity(70);
   driveController.turnAngle(90_deg);
-  driveController.moveDistance(12_in);
+  driveController.moveDistance(10_in);
   driveController.turnAngle(90_deg);
   driveController.forward(-0.7);
-  pros::delay(800);
+  pros::delay(1000);
   driveController.stop();
   flipperController.setTarget(120);
-  driveController.setMaxVelocity(100);
+  driveController.setMaxVelocity(70);
   driveController.moveDistance(28_in);
   driveController.setMaxVelocity(30);
   driveController.moveDistance(12_in);
@@ -305,8 +308,8 @@ void autoRed2() {
   driveController.setMaxVelocity(40);
   driveController.moveDistance(-28_in);
   driveController.turnAngle(90_deg);
-  driveController.setMaxVelocity(80);
-  driveController.moveDistance(60_in);
+  driveController.setMaxVelocity(70);
+  driveController.moveDistance(57_in);
   driveController.turnAngle(90_deg);
   flipperController.setTarget(105);
   flipperController.waitUntilSettled();
@@ -314,7 +317,7 @@ void autoRed2() {
   liftController.setTarget(540);
   liftController.waitUntilSettled();
   driveController.setMaxVelocity(30);
-  driveController.moveDistance(8_in);
+  driveController.moveDistance(9_in);
   liftController.setMaxVelocity(70);
   liftController.setTarget(200);
   liftController.waitUntilSettled();
@@ -324,5 +327,5 @@ void autoRed2() {
 }
 
 void autonomous() {
-  autoRed2();
+  autoRedBack();
 }

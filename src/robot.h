@@ -58,12 +58,12 @@ inline auto profileController = AsyncControllerFactory::motionProfile(
 
 // Piston definitions
 extern bool CATAPULT_STATE;
-const int CATAPULT = 3;
+const int CATAPULT = 2;
 inline pros::ADIDigitalOut catapult (CATAPULT);
 
 extern bool TRANSMISSION_STATE;
-const int TRANSMISSION = 2;
-inline pros::ADIDigitalOut transmission (TRANSMISSION);
+const int TRANSMISSION = 3;
+inline pros::ADIDigitalOut transmission (TRANSMISSION, true);
 
 extern bool BRAKE_STATE;
 const int BRAKE = 1;
