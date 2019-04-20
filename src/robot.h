@@ -8,6 +8,8 @@ const int STARTING_HEIGHT = 0;
 const int LOW_GOAL_HEIGHT = 520;
 const int HIGH_GOAL_HEIGHT = 700;
 const int DROP_HEIGHT = 80;
+const int PLATFORM_LIFT_HEIGHT = 180;
+const int CAP_PLATFORM_LIFT_HEIGHT = 80;
 extern int CURRENT_HEIGHT;
 
 const int LIFT_MOTOR_1 = -18;

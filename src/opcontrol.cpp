@@ -24,6 +24,7 @@ ControllerButton bumperRightUp(ControllerDigital::R1);
 ControllerButton bumperRigthDown(ControllerDigital::R2);
 ControllerButton bumperLeftUp(ControllerDigital::L1);
 ControllerButton bumperLeftDown(ControllerDigital::L2);
+ControllerButton up(ControllerDigital::up);
 ControllerButton down(ControllerDigital::down);
 ControllerButton A(ControllerDigital::A);
 ControllerButton B(ControllerDigital::B);
@@ -60,7 +61,7 @@ void opcontrol() {
     }
 
     // Catapult
-    if (bumperLeftDown.changedToPressed()) {
+    if (up.changedToPressed()) {
          CATAPULT_STATE = !CATAPULT_STATE;
          catapult.set_value(CATAPULT_STATE);
     }
@@ -72,45 +73,88 @@ void opcontrol() {
     }
 
     // Lift
-    if (B.changedToPressed())      //Press button to go to raise lift to height
-     {
-       if(liftController.isDisabled()){
-         liftController.flipDisable();
-       }
-       liftController.setTarget(STARTING_HEIGHT);
-       CURRENT_HEIGHT = STARTING_HEIGHT;
-     }
-     else if (A.changedToPressed())
-     {
-        if(liftController.isDisabled()){
-          liftController.flipDisable();
-        }
-        liftController.setTarget(LOW_GOAL_HEIGHT);
-        CURRENT_HEIGHT = LOW_GOAL_HEIGHT;
-      }
-     else if (X.changedToPressed())
-     {
-       if(liftController.isDisabled()){
-         liftController.flipDisable();
-       }
-       liftController.setTarget(HIGH_GOAL_HEIGHT);
-       CURRENT_HEIGHT = HIGH_GOAL_HEIGHT;
-     }
-     else if (Y.changedToPressed() && (CURRENT_HEIGHT >= DROP_HEIGHT))
-     {
-       if(liftController.isDisabled()){
-         liftController.flipDisable();
-       }
-       liftController.setTarget(CURRENT_HEIGHT-DROP_HEIGHT);      //Drop lift a bit to place cap on post
-     }
-     else if ( abs(controller.getAnalog(ControllerAnalog::rightY)) > 0.1) {
-       if(!liftController.isDisabled()){
-         liftController.flipDisable();
-       }
-       lift.moveVoltage(12000*controller.getAnalog(ControllerAnalog::rightY));
-     } else if (liftController.isDisabled() && abs(controller.getAnalog(ControllerAnalog::rightY)) <= 0.1) {
-       lift.moveVoltage(0);
-     }
+		if (bumperLeftDown.isPressed()) {
+			if (B.changedToPressed())      //Press button to go to raise lift to height
+			 {
+				 if(liftController.isDisabled()){
+					 liftController.flipDisable();
+				 }
+				 liftController.setTarget(CAP_PLATFORM_LIFT_HEIGHT);
+				 CURRENT_HEIGHT = CAP_PLATFORM_LIFT_HEIGHT;
+			 }
+			 else if (A.changedToPressed())
+			 {
+					if(liftController.isDisabled()){
+						liftController.flipDisable();
+					}
+					liftController.setTarget(LOW_GOAL_HEIGHT-DROP_HEIGHT-20);
+					CURRENT_HEIGHT = LOW_GOAL_HEIGHT-DROP_HEIGHT-20;
+				}
+			 else if (X.changedToPressed())
+			 {
+				 if(liftController.isDisabled()){
+					 liftController.flipDisable();
+				 }
+				 liftController.setTarget(HIGH_GOAL_HEIGHT-DROP_HEIGHT);
+				 CURRENT_HEIGHT = HIGH_GOAL_HEIGHT-DROP_HEIGHT;
+			 }
+			 else if (Y.changedToPressed() && (CURRENT_HEIGHT >= DROP_HEIGHT))
+			 {
+				 if(liftController.isDisabled()){
+					 liftController.flipDisable();
+				 }
+				 liftController.setTarget(CURRENT_HEIGHT-DROP_HEIGHT);      //Drop lift a bit to place cap on post
+			 }
+			 else if ( abs(controller.getAnalog(ControllerAnalog::rightY)) > 0.1) {
+				 if(!liftController.isDisabled()){
+					 liftController.flipDisable();
+				 }
+				 lift.moveVoltage(12000*controller.getAnalog(ControllerAnalog::rightY));
+			 } else if (liftController.isDisabled() && abs(controller.getAnalog(ControllerAnalog::rightY)) <= 0.1) {
+				 lift.moveVoltage(0);
+			 }
+		} else {
+			if (B.changedToPressed())      //Press button to go to raise lift to height
+			 {
+				 if(liftController.isDisabled()){
+					 liftController.flipDisable();
+				 }
+				 liftController.setTarget(STARTING_HEIGHT);
+				 CURRENT_HEIGHT = STARTING_HEIGHT;
+			 }
+			 else if (A.changedToPressed())
+			 {
+					if(liftController.isDisabled()){
+						liftController.flipDisable();
+					}
+					liftController.setTarget(LOW_GOAL_HEIGHT);
+					CURRENT_HEIGHT = LOW_GOAL_HEIGHT;
+				}
+			 else if (X.changedToPressed())
+			 {
+				 if(liftController.isDisabled()){
+					 liftController.flipDisable();
+				 }
+				 liftController.setTarget(HIGH_GOAL_HEIGHT);
+				 CURRENT_HEIGHT = HIGH_GOAL_HEIGHT;
+			 }
+			 else if (Y.changedToPressed() && (CURRENT_HEIGHT >= DROP_HEIGHT))
+			 {
+				 if(liftController.isDisabled()){
+					 liftController.flipDisable();
+				 }
+				 liftController.setTarget(CURRENT_HEIGHT-DROP_HEIGHT);      //Drop lift a bit to place cap on post
+			 }
+			 else if ( abs(controller.getAnalog(ControllerAnalog::rightY)) > 0.1) {
+				 if(!liftController.isDisabled()){
+					 liftController.flipDisable();
+				 }
+				 lift.moveVoltage(12000*controller.getAnalog(ControllerAnalog::rightY));
+			 } else if (liftController.isDisabled() && abs(controller.getAnalog(ControllerAnalog::rightY)) <= 0.1) {
+				 lift.moveVoltage(0);
+			 }
+		}
+
 
      pros::delay(20);
 	}
