@@ -19,12 +19,14 @@ void removeSlack() {
  }
 
 void moveDistance(QLength len) {
+   driveController.setMaxVoltage(200);
    profileController.generatePath({Point{0_ft, 0_ft, 0_deg}, Point{len, 0_ft, 0_deg}}, "A");
    profileController.setTarget("A");
    profileController.waitUntilSettled();
 }
 
 void moveDistance(QLength len, bool isBackwards) {
+  driveController.setMaxVoltage(200);
   profileController.generatePath({Point{0_ft, 0_ft, 0_deg}, Point{len, 0_ft, 0_deg}}, "A");
   profileController.setTarget("A", isBackwards);
   profileController.waitUntilSettled();
@@ -160,58 +162,54 @@ void autoRedBack() {
   removeSlack();
   pros::delay(100);
   // Get first cap
-  driveController.setMaxVelocity(40);
-  driveController.moveDistance(-5_in);
-  pros::delay(100);
-  driveController.turnAngle(90_deg);
+  driveController.turnAngle(95_deg);
   pros::delay(100);
   liftController.setTarget(-20);
   flipperController.setTarget(120);
-  driveController.setMaxVelocity(100);
-  driveController.moveDistance(20_in);
+  moveDistance(24_in);
   driveController.setMaxVelocity(30);
   driveController.moveDistance(12_in);
+  driveController.setMaxVelocity(200);
   pros::delay(100);
   liftController.setMaxVelocity(50);
-  flipperController.setTarget(80);
+  flipperController.setTarget(90);
   flipperController.waitUntilSettled();
-  driveController.setMaxVelocity(40);
-  driveController.moveDistance(-16_in);
-  driveController.turnAngle(85_deg);
+  moveDistance(10.5_in, true);
   pros::delay(100);
-  driveController.moveDistance(10_in);
+  driveController.turnAngle(95_deg);
+  removeSlack();
+  moveDistance(10_in);
   flipperController.setTarget(105);
   flipperController.waitUntilSettled();
   liftController.setMaxVelocity(150);
   liftController.setTarget(540);
   liftController.waitUntilSettled();
-  driveController.moveDistance(11_in);
+  frontWithUltra();
   liftController.setMaxVelocity(70);
   liftController.setTarget(200);
   liftController.waitUntilSettled();
   flipperController.setTarget(0);
   liftController.setTarget(-20);
   liftController.waitUntilSettled();
-  driveController.setMaxVelocity(40);
-  driveController.moveDistance(-12_in);
+  moveDistance(12_in, true);
   pros::delay(100);
-  driveController.turnAngle(-52_deg);
+  driveController.turnAngle(-42_deg);
   flipperController.setTarget(120);
   flipperController.waitUntilSettled();
-  driveController.setMaxVelocity(60);
-  driveController.moveDistance(18_in);
+  moveDistance(18_in);
+  flipperController.setTarget(90);
   liftController.setTarget(100);
   liftController.waitUntilSettled();
-  driveController.moveDistance(-18_in);
+  moveDistance(5_in, true);
   driveController.turnAngle(140_deg);
+  removeSlack();
   flipperController.setTarget(0);
   flipperController.waitUntilSettled();
-  driveController.moveDistance(10_in);
+  moveDistance(10_in);
   liftController.setMaxVelocity(600);
   liftController.setTarget(540);
   liftController.waitUntilSettled();
-  driveController.setMaxVelocity(40);
-  driveController.moveDistance(10_in);
+  frontWithUltra();
   flipperController.setTarget(110);
   flipperController.waitUntilSettled();
   pros::delay(500);
@@ -221,40 +219,35 @@ void autoRedBack() {
   flipperController.setTarget(0);
   liftController.setTarget(-20);
   liftController.waitUntilSettled();
-  driveController.setMaxVelocity(120);
-  driveController.turnAngle(105_deg);
+  driveController.turnAngle(95_deg);
   flipperController.setTarget(120);
-  driveController.setMaxVelocity(100);
-  driveController.moveDistance(48_in);
+  moveDistance(49_in);
   flipperController.setTarget(0);
   flipperController.waitUntilSettled();
-  driveController.moveDistance(-5_in);
+  moveDistance(2_in, true);
   driveController.turnAngle(-100_deg);
   // Place 3rd
   liftController.setMaxVelocity(200);
   liftController.setTarget(720);
   liftController.waitUntilSettled();
-  driveController.setMaxVelocity(60);
-  driveController.moveDistance(7_in);
-  flipperController.setTarget(95);
+  frontWithUltra();
+  driveController.forward(0.02);
+  flipperController.setTarget(105);
   flipperController.waitUntilSettled();
   pros::delay(700);
+  driveController.stop();
   liftController.setMaxVelocity(150);
   liftController.setTarget(150);
   liftController.waitUntilSettled();
   flipperController.setTarget(0);
   liftController.setTarget(-20);
   liftController.waitUntilSettled();
-  driveController.setMaxVelocity(80);
-  driveController.moveDistance(-11_in);
+  moveDistance(11_in, true);
   driveController.turnAngle(90_deg);
-  driveController.moveDistance(-12_in);
+  moveDistance(12_in, true);
   driveController.turnAngle(-90_deg);
   liftController.setTarget(180);
-  driveController.forward(-0.7);
-  pros::delay(400);
-  driveController.forward(1);
-  pros::delay(300);
+  transmission.set_value(0);
   driveController.forward(-1);
   pros::delay(2000);
   driveController.stop();
@@ -451,5 +444,5 @@ void autoBlueFront() {
 }
 
 void autonomous() {
-  autoRedFront();
+  autoRedBack();
 }
