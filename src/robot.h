@@ -53,8 +53,8 @@ inline auto driveController = ChassisControllerFactory::create(
 
 inline auto profileController = AsyncControllerFactory::motionProfile(
   2.0,  // Maximum linear velocity of the Chassis in m/s
-  1.0,  // Maximum linear acceleration of the Chassis in m/s/s
-  5, // Maximum linear jerk of the Chassis in m/s/s/s
+  1.5,  // Maximum linear acceleration of the Chassis in m/s/s
+  10.0, // Maximum linear jerk of the Chassis in m/s/s/s
   driveController // Chassis Controller
 );
 
