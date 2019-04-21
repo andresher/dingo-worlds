@@ -52,8 +52,8 @@ inline auto driveController = ChassisControllerFactory::create(
 );
 
 inline auto profileController = AsyncControllerFactory::motionProfile(
-  1.0,  // Maximum linear velocity of the Chassis in m/s
-  2.0,  // Maximum linear acceleration of the Chassis in m/s/s
+  1.5,  // Maximum linear velocity of the Chassis in m/s
+  1.5,  // Maximum linear acceleration of the Chassis in m/s/s
   10.0, // Maximum linear jerk of the Chassis in m/s/s/s
   driveController // Chassis Controller
 );
@@ -70,8 +70,10 @@ inline pros::ADIDigitalOut transmission (TRANSMISSION, true);
 extern bool BRAKE_STATE;
 const int BRAKE = 1;
 inline pros::ADIDigitalOut brake (BRAKE);
+inline ADIUltrasonic ultrasonic ('g', 'h'); // g = input, h = output
 
 // Utilities
 double map(double value, double low1, double high1, double low2, double high2);
+void initUltrasonic();
 
 #endif // _ROBOT_

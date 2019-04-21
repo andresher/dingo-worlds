@@ -95,3 +95,10 @@ double map(double value, double low1, double high1, double low2, double high2) {
 	}
   return low2 + (value - low1) * (high2 - low2) / (high1 - low1);
 }
+
+void initUltrasonic() {
+	for (int i=0; i<100; i++) {
+		ultrasonic.get();
+		pros::delay(1);
+	}
+}
