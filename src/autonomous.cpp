@@ -36,7 +36,7 @@ void frontWithUltra() {
   for (int i=0; i<100; i++) {
 		ultrasonic.get();
 	}
-  while(ultrasonic.get() > 422.0) {
+  while(ultrasonic.get() > 420.0) {
     driveController.forward(0.10);
   }
   driveController.stop();
@@ -166,17 +166,14 @@ void autoRedBack() {
   pros::delay(100);
   liftController.setTarget(-20);
   flipperController.setTarget(120);
-  moveDistance(24_in);
-  driveController.setMaxVelocity(30);
-  driveController.moveDistance(12_in);
-  driveController.setMaxVelocity(200);
+  moveDistance(36_in);
   pros::delay(100);
   liftController.setMaxVelocity(50);
   flipperController.setTarget(90);
   flipperController.waitUntilSettled();
   moveDistance(10.5_in, true);
   pros::delay(100);
-  driveController.turnAngle(95_deg);
+  driveController.turnAngle(90_deg);
   removeSlack();
   moveDistance(10_in);
   flipperController.setTarget(105);
@@ -191,7 +188,7 @@ void autoRedBack() {
   flipperController.setTarget(0);
   liftController.setTarget(-20);
   liftController.waitUntilSettled();
-  moveDistance(12_in, true);
+  moveDistance(11_in, true);
   pros::delay(100);
   driveController.turnAngle(-42_deg);
   flipperController.setTarget(120);
@@ -201,7 +198,7 @@ void autoRedBack() {
   liftController.setTarget(100);
   liftController.waitUntilSettled();
   moveDistance(5_in, true);
-  driveController.turnAngle(140_deg);
+  driveController.turnAngle(137_deg);
   removeSlack();
   flipperController.setTarget(0);
   flipperController.waitUntilSettled();
@@ -228,15 +225,25 @@ void autoRedBack() {
   driveController.turnAngle(-100_deg);
   // Place 3rd
   liftController.setMaxVelocity(200);
-  liftController.setTarget(720);
+  liftController.setTarget(HIGH_GOAL_HEIGHT);
   liftController.waitUntilSettled();
-  frontWithUltra();
-  driveController.forward(0.02);
   flipperController.setTarget(105);
   flipperController.waitUntilSettled();
-  pros::delay(700);
+  frontWithUltra();
+  driveController.forward(0.02);
+  // shaky shaky
+  liftController.flipDisable();
+  for (int i=0; i<4; i++){
+    lift.moveVoltage(5000);
+    pros::delay(120);
+    lift.moveVoltage(-5000);
+    pros::delay(100);
+  }
+  liftController.flipDisable();
+  // end shaky shaky
   driveController.stop();
-  liftController.setMaxVelocity(150);
+  pros::delay(300);
+  liftController.setMaxVelocity(100);
   liftController.setTarget(150);
   liftController.waitUntilSettled();
   flipperController.setTarget(0);
@@ -244,7 +251,7 @@ void autoRedBack() {
   liftController.waitUntilSettled();
   moveDistance(11_in, true);
   driveController.turnAngle(90_deg);
-  moveDistance(12_in, true);
+  moveDistance(14_in, true);
   driveController.turnAngle(-90_deg);
   liftController.setTarget(180);
   transmission.set_value(0);
