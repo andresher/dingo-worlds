@@ -3,6 +3,10 @@
 
 #include "main.h"
 
+// Auto selector
+extern int AUTO_SELECTOR;
+const int AUTO_ROUTINES = 4;
+
 // Lift definitions
 const int STARTING_HEIGHT = 0;
 const int LOW_GOAL_HEIGHT = 520;

@@ -464,5 +464,25 @@ void autoBlueFront() {
 }
 
 void autonomous() {
-  autoRedFront();
+  switch (AUTO_SELECTOR) {
+		case 0: {
+			autoRedFront();
+			break;
+		}
+		case 1: {
+			autoRedBack();
+			break;
+		}
+		case 2: {
+			autoBlueFront();
+			break;
+		}
+		case 3: {
+			autoBlueBack();
+			break;
+		}
+		default: {
+			break;
+		}
+	}
 }

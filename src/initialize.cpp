@@ -1,14 +1,52 @@
 #include "main.h"
 #include "robot.h"
 
-void on_center_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
-		pros::lcd::set_text(2, "I was pressed!");
-	} else {
-		pros::lcd::clear_line(2);
+char AUTO_0_MESS[] = "AUTO RED FRONT";
+char AUTO_1_MESS[] = "AUTO RED BACK";
+char AUTO_2_MESS[] = "AUTO BLUE FRONT";
+char AUTO_3_MESS[] = "AUTO BLUE BACK";
+
+void show_auto_name() {
+	switch (AUTO_SELECTOR) {
+		case 0: {
+			pros::lcd::set_text(6, "AUTO RED FRONT");
+			break;
+		}
+		case 1: {
+			pros::lcd::set_text(6, "AUTO RED BACK");
+			break;
+		}
+		case 2: {
+			pros::lcd::set_text(6, "AUTO BLUE FRONT");
+			break;
+		}
+		case 3: {
+			pros::lcd::set_text(6, "AUTO BLUE BACK");
+			break;
+		}
+		default: {
+			pros::lcd::set_text(6, "NO AUTO HERE");
+			break;
+		}
 	}
+}
+
+void on_right_button() {
+	if (AUTO_SELECTOR < AUTO_ROUTINES - 1) {
+		AUTO_SELECTOR++;
+	} else {
+		AUTO_SELECTOR = 0;
+	}
+	show_auto_name();
+}
+
+void on_left_button() {
+	if (AUTO_SELECTOR > 0) {
+		AUTO_SELECTOR--;
+	} else {
+		AUTO_SELECTOR = AUTO_ROUTINES - 1;
+	}
+	show_auto_name();
 }
 
 /**
@@ -19,9 +57,13 @@ void on_center_button() {
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
+	pros::lcd::set_text(1, "DINGO by AON Robotics");
+	pros::lcd::set_text(3, "\"Think out of the box\"");
+	pros::lcd::set_text(4, "- Eduardo Rodriguez");
 
-	pros::lcd::register_btn1_cb(on_center_button);
+	pros::lcd::register_btn0_cb(on_left_button);
+	pros::lcd::register_btn2_cb(on_right_button);
+	show_auto_name();
 
 	initUltrasonic();
 }

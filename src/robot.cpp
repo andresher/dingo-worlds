@@ -8,6 +8,7 @@ bool BRAKE_STATE = 0;
 int CURRENT_HEIGHT = 0;
 int flipperState = 0;
 int flipperInput = 0;
+int AUTO_SELECTOR = 0;
 
 void flipperFSM(){
 	int flipHeight = 20;
