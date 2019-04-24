@@ -1,11 +1,6 @@
 #include "main.h"
 #include "robot.h"
 
-char AUTO_0_MESS[] = "AUTO RED FRONT";
-char AUTO_1_MESS[] = "AUTO RED BACK";
-char AUTO_2_MESS[] = "AUTO BLUE FRONT";
-char AUTO_3_MESS[] = "AUTO BLUE BACK";
-
 void show_auto_name() {
 	switch (AUTO_SELECTOR) {
 		case 0: {
