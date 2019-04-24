@@ -36,19 +36,19 @@ void frontWithUltra() {
   for (int i=0; i<100; i++) {
 		ultrasonic.get();
 	}
-  while(ultrasonic.get() > 420.0) {
+  while(ultrasonic.get() > 365.0) {
     driveController.forward(0.10);
   }
   driveController.stop();
 }
 
 void autoBlueBack() {
-  int turnSpeed = 120;
+  int turnSpeed = 70;
   catapult.set_value(0);
   removeSlack();
   pros::delay(100);
   // Get first cap
-  moveDistance(3.75_in, true);
+  moveDistance(2.75_in, true);
   driveController.setMaxVelocity(turnSpeed);
   driveController.turnAngle(-85_deg);
   pros::delay(100);
@@ -56,10 +56,12 @@ void autoBlueBack() {
   flipperController.setTarget(120);
   moveDistance(30_in);
   pros::delay(100);
-  liftController.setMaxVelocity(50);
-  flipperController.setTarget(90);
+  flipperController.setTarget(80);
   flipperController.waitUntilSettled();
-  moveDistance(17_in, true);
+  liftController.setMaxVelocity(100);
+  liftController.setTarget(180);
+  liftController.waitUntilSettled();
+  moveDistance(14.5_in, true);
   pros::delay(100);
   driveController.setMaxVelocity(turnSpeed);
   driveController.turnAngle(-90_deg);
@@ -80,16 +82,16 @@ void autoBlueBack() {
   moveDistance(11_in, true);
   pros::delay(100);
   driveController.setMaxVelocity(turnSpeed);
-  driveController.turnAngle(60_deg);
+  driveController.turnAngle(40_deg);
   flipperController.setTarget(120);
   flipperController.waitUntilSettled();
   moveDistance(18_in);
   flipperController.setTarget(90);
   liftController.setTarget(100);
   liftController.waitUntilSettled();
-  moveDistance(9_in, true);
+  moveDistance(7_in, true);
   driveController.setMaxVelocity(turnSpeed);
-  driveController.turnAngle(-155_deg);
+  driveController.turnAngle(-140_deg);
   removeSlack();
   flipperController.setTarget(0);
   flipperController.waitUntilSettled();
@@ -109,7 +111,7 @@ void autoBlueBack() {
   liftController.waitUntilSettled();
   moveDistance(3_in, true);
   driveController.setMaxVelocity(turnSpeed);
-  driveController.turnAngle(-95_deg);
+  driveController.turnAngle(-85_deg);
   flipperController.setTarget(120);
   moveDistance(49_in);
   flipperController.setTarget(0);
@@ -464,6 +466,8 @@ void autoBlueFront() {
 }
 
 void autonomous() {
+  autoBlueBack();
+  pros::delay(1000000);
   switch (AUTO_SELECTOR) {
 		case 0: {
 			autoRedFront();

@@ -32,7 +32,7 @@ ControllerButton X(ControllerDigital::X);
 ControllerButton Y(ControllerDigital::Y);
 void opcontrol() {
 	while (true) {
-
+		printf("ultra = %f\n", ultrasonic.get());
 		// Drive
 		if (lift.getPosition() > 300) {
 			driveController.arcade(

@@ -74,7 +74,7 @@ inline pros::ADIDigitalOut transmission (TRANSMISSION, true);
 extern bool BRAKE_STATE;
 const int BRAKE = 1;
 inline pros::ADIDigitalOut brake (BRAKE);
-inline ADIUltrasonic ultrasonic ('g', 'h'); // g = input, h = output
+inline ADIUltrasonic ultrasonic ('g', 'h'); // h = input, g = output
 
 // Utilities
 double map(double value, double low1, double high1, double low2, double high2);
